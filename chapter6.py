@@ -54,7 +54,7 @@ y = L(x, 5, 2)
 x0 = np.asarray([0.4, 0.4])
 y0 = np.asarray([0, L(0.4, 5, 2)])
 
-plt.figure((figsize=(6, 6))
+plt.figure(figsize=(6, 6))
 plt.plot(x, y, c='b', lw=3)
 plt.plot(x0, y0, linestyle='dashed', c='k', lw=3)
 plt.xticks(size=16)
