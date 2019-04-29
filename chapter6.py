@@ -1,6 +1,7 @@
 import numpy as np
 import scipy.special as scm
 import matplotlib.pyplot as plt
+from scipy import integrate
 
 # 正規分布関数の定義
 def gauss(x, n):
@@ -15,3 +16,8 @@ plt.bar(X, [scm.comb(N, i)/M for i in X])
 plt.plot(X, gauss(np.array(X), N), c='k', linewidth=2)
 # plt.show()
 plt.savefig('gauss.png')
+
+# 数値計算による定積分
+def normal(x):
+    return np.exp(-((x-500)**)/500)/np.sqrt(500*np.pi)
+integrate.quad(normal, 0, 480)
