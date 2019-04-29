@@ -34,7 +34,7 @@ def sigmoid(x):
 x = np.linspace(-5, 5, 1000)
 y_std = std(x, 1.6)
 sig = sigmoid(x)
-y_stg = sig * (1-sig)
+y_sig = sig * (1-sig)
 
 # グラフ描画
 plt.figure(figsize=(8, 8))
