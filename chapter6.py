@@ -39,7 +39,7 @@ y_sig = sig * (1-sig)
 # グラフ描画
 plt.figure(figsize=(8, 8))
 plt.plot(x, y_std, label="std", c='k', lw=3, linestyle='-.')
-plt.plot(x, y_sig, c='b', lw=3)
+plt.plot(x, y_sig, label="sig", c='b', lw=3)
 plt.legend(fontsize=14)
 plt.grid(lw=2)
 plt.savefig('gause_sigmoid.png')
