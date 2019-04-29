@@ -20,4 +20,4 @@ plt.savefig('gauss.png')
 # 数値計算による定積分
 def normal(x):
     return np.exp(-((x-500)**2)/500)/np.sqrt(500*np.pi)
-integrate.quad(normal, 0, 480)
+print(integrate.quad(normal, 0, 480))
