@@ -13,4 +13,5 @@ M = 2**N
 X = range(440, 561)
 plt.bar(X, [scm.comb(N, i)/M for i in X])
 plt.plot(X, gauss(np.array(X), N), c='k', linewidth=2)
-plt.show()
+# plt.show()
+plt.savefig('gauss.png')
