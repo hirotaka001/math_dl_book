@@ -21,3 +21,25 @@ plt.savefig('gauss.png')
 def normal(x):
     return np.exp(-((x-500)**2)/500)/np.sqrt(500*np.pi)
 print(integrate.quad(normal, 0, 480))
+
+# 正規分布関数
+def std(x, sigma=1):
+    return (np.exp(-(x/sigma)**2/2)) / (np.sqrt(2*np.pi)*sigma)
+
+# シグモイド関数(確率分布関数)
+def sigmoid(x):
+    return (1/(1+np.exp(x)))
+
+# 座標値の計算
+x = np.linspace(-5, 5, 1000)
+y_std = std(x, 1.6)
+sig = sigmoid(x)
+y_stg = sig * (1-sig)
+
+# グラフ描画
+plt.figure(figsize=(8, 8))
+plt.plot(x, y_std, label="std", c='k', lw=3, linestyle='-.')
+plt.plot(x, y_sig, c='b', lw=3)
+plt.legend(fontsize=14)
+plt.grid(lw=2)
+plt.savefig('gause_sigmoid.png')
