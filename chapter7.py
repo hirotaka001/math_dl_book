@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # 必須ライブラリの宣言
+import sys,io
 import numpy as np
 import matplotlib.pyplot as plt
 from IPython.display import set_matplotlib_formats
 from sklearn.datasets import load_boston
 
-import sys,io
+# sys.stdoutのエンコード変更
 enc = 'utf-8'
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding=enc)
 sys.stdin = io.TextIOWrapper(sys.stdin.buffer, encoding=enc)
@@ -34,3 +35,48 @@ print(x[:5, :])
 
 # 正解データ yの表示
 print(yt[:5])
+
+# 散布図の表示
+plt.scatter(x[:, 1], yt, s=10, c='b')
+plt.xlabel('ROOM', fontsize=14)
+plt.ylabel('PRICE', fontsize=14)
+plt.savefig('scatter_plot.png')
+
+# 予測関数(1,x)の値から予測値ypを計算する. @:内積
+def pred(x, w):
+    return (x @ w)
+
+## 勾配降下法の初期化処理
+# データ系列総数
+M = x.shape[0]
+# 入力データ次元数(ダミー変数を含む)
+D = x.shape[1]
+# 繰り返し回数
+iters = 50000
+# 学習率
+alpha = 0.01
+# 重みベクトルの初期値(すべての値を1にする)
+w = np.ones(D)
+# 評価結果記録用(損失関数値のみ記録)
+history = np.zeros((0, 2))
+
+# 繰り返しループ
+for k in range(iters):
+    # 予測値の計算(7.8.1)
+    yp = pred(x, w)
+    # 誤差の計算(7.8.2)
+    yd = yp - yt
+    # 勾配降下法の実装(7.8.4) .Tは転置行列
+    w = w - alpha * (x.T @ yd) / M
+    # 学習曲線描画用データの計算、保存
+    if (k % 100 == 0):
+        # 損失関数値の計算(7.6.1)
+        loss = np.mean(yd**2) / 2
+        # 計算結果の記録
+        history = np.vstack((history, np.array([k, loss])))
+        # 画面表示
+        print("iter = %d loss = %f" % (k, loss))
+
+# 最終的な損失関数初期値、最終値
+print('損失関数初期値: %f' % history[0, 1])
+print('損失関数最終値: %f' % history[-1, 1])
