@@ -175,4 +175,4 @@ print('損失関数最終値: %f' % history[-1, 1])
 
 # 学習曲線の表示(最初の10個分を除く)
 plt.plot(history[:, 0], history[:, 1])
-plt.savefig('Multiple_regression_model.png')
+plt.savefig('learning_curve_multiple_regression_model.png')
