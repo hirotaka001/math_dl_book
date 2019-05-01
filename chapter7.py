@@ -80,3 +80,20 @@ for k in range(iters):
 # 最終的な損失関数初期値、最終値
 print('損失関数初期値: %f' % history[0, 1])
 print('損失関数最終値: %f' % history[-1, 1])
+
+# 下記直線描画用の座標値計算
+xall = x[:, 1].ravel()
+xl = np.array([[1, xall.min()], [1, xall.max()]])
+yl = pred(xl, w)
+
+# 散布図と回帰直線の描画
+plt.figure(figsize=(6, 6))
+plt.scatter(x[:, 1], yt, s=10, c='b')
+plt.xlabel('ROOM', fontsize=14)
+plt.ylabel('PROCE', fontsize=14)
+plt.plot(xl[:, 1], yl, c='k')
+plt.savefig('scatter_regressionline_plot.png')
+
+# 学習曲線の表示(最初の1個分を覗く)
+plt.plot(history[1:, 0], history[1:, 1])
+plt.savefig('learning_curve.png')
