@@ -135,7 +135,7 @@ print('勾配値の計算 grad= ', grad)
 
 ## 重回帰モデルへの拡張
 # 列(LSTAT:低所得者率)の追加
-x_add = x_org[:, feature_names == 'LSTAT']
+x_add = x_org[:,feature_names == 'LSTAT']
 x2 = np.hstack((x, x_add))
 print(x2.shape)
 # 入力データxの表示(ダミーデータを含む)
