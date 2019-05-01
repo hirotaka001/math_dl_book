@@ -1,4 +1,5 @@
-# coding: UTF-8
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 # 必須ライブラリの宣言
 import numpy as np
 import matplotlib.pyplot as plt
