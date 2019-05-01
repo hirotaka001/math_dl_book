@@ -1,10 +1,14 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 # 必須ライブラリの宣言
 import numpy as np
 import matplotlib.pyplot as plt
 from IPython.display import set_matplotlib_formats
 from sklearn.datasets import load_boston
+
+import sys,io
+enc = 'utf-8'
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding=enc)
+sys.stdin = io.TextIOWrapper(sys.stdin.buffer, encoding=enc)
 
 # PDF出力用
 set_matplotlib_formats('png', 'pdf')
