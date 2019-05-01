@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 # 必須ライブラリの宣言
+import sys,io
 import numpy as np
+
+# sys.stdoutのエンコード変更
+enc = 'utf-8'
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding=enc)
+sys.stdin = io.TextIOWrapper(sys.stdin.buffer, encoding=enc)
 
 ## Numpyを使ったコーディングテクニック
 # ベクトル・ベクトル間の内積
