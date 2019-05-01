@@ -70,7 +70,7 @@ for k in range(iters):
     w = w - alpha * (x.T @ yd) / M
     # 学習曲線描画用データの計算、保存
     if (k % 100 == 0):
-        # 損失関数値の計算(7.6.1)
+        # 損失関数値の計算(7.6.1) mean:平均値の計算
         loss = np.mean(yd**2) / 2
         # 計算結果の記録
         history = np.vstack((history, np.array([k, loss])))
@@ -133,3 +133,81 @@ print(yd)
 grad = XT @ yd
 print('勾配値の計算 grad= ', grad)
 
+## 重回帰モデルへの拡張
+# 列(LSTAT:低所得者率)の追加
+x_add = x_org[:, feature_names == 'LSTAT']
+x2 = np.hstack((x, x_add))
+print(x2.shape)
+# 入力データxの表示(ダミーデータを含む)
+print(x2[:5, :])
+
+# 初期化処理
+# データ系列総数
+M = x2.shape[0]
+# 入力データ次元数(ダミー変数を含む)
+D = x2.shape[1]
+# 繰り返し回数
+iters = 50000
+# 学習率
+alpha = 0.01
+# 重みベクトルの初期値(すべての値を1にする)
+w = np.ones(D)
+# 評価結果記録用(損失関数値のみ記録)
+history = np.zeros((0, 2))
+
+# 繰り返しループ
+for k in range(iters):
+    # 予測値の計算(7.8.1)
+    yp = pred(x2, w)
+    # 誤差の計算(7.8.2)
+    yd = yp - yt
+    # 勾配降下法の実装(7.8.4)
+    w = w - alpha * (x2.T @ yd) / M
+
+    # 学習曲線描画用データの計算、保存
+    if(k % 100 == 0):
+        # 損失関数値の計算(7.6.1)
+        loss = np.mean(yd ** 2) / 2
+        # 計算結果の記録
+        history = np.vstack((history, np.array([k, loss])))
+        # 画面表示
+        print("iter = %d loss = %f" % (k, loss))
+
+# 初期化処理(パラメータを的殺な値に変更)
+# データ系列総数
+M = x2.shape[0]
+# 入力データ次元数(ダミー変数を含む)
+D = x2.shape[1]
+# 繰り返し回数
+iters = 2000
+# 学習率
+alpha = 0.001
+# 重みベクトルの初期値(すべての値を1にする)
+w = np.ones(D)
+# 評価結果記録用(損失関数値のみ記録)
+history = np.zeros((0, 2))
+
+# 繰り返しループ
+for k in range(iters):
+    # 予測値の計算(7.8.1)
+    yp = pred(x2, w)
+    # 誤差の計算(7.8.2)
+    yd = yp - yt
+    # 勾配降下法の実装(7.8.4)
+    w = w -alpha * (x2.T @ yd) / M
+    # 学習曲線描画用データの計算、保存
+    if(k % 100 == 0):
+        # 損失関数値の計算(7.6.1)
+        loss = np.mean(yd ** 2) / 2
+        # 計算結果の記録
+        history = np.vstack((history, np.array([k, loss])))
+        # 画面表示
+        print("iter = %d loss = %f" % (k, loss))
+
+# 最終的な損失関数の初期値、最終値
+print('損失関数初期値: %f' % history[0, 1])
+print('損失関数最終値: %f' % history[-1, 1])
+
+# 学習曲線の表示(最初の10個分を除く)
+plt.plot(history[:, 0], history[:, 1])
+plt.savefig('Multiple_regression_model.png')
