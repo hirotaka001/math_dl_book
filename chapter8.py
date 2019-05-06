@@ -40,7 +40,7 @@ plt.savefig('sigmoid_function.png')
 # 学習データ準備
 iris = load_iris()
 x_org, y_org = iris.data, iris.target
-print('元データ', x_org.shape, y_data.shape)
+print('元データ', x_org.shape, y_org.shape)
 # データ絞り込み
 # クラス0, 1 のみ
 # 項目sepal_lengthとsepal_widthのみ
@@ -105,7 +105,7 @@ def pred(x, w):
 # 損失関数(交差エントロピー関数)
 def cross_entropy(yt, yp):
     # 交差エントロピーの計算(この段階ではベクトル)
-    ce1 = -(yt * np.log(yp) + (1 - yt)*np.log(1 - yp))
+    ce1 = -(yt * np.log(yp) + (1 - yt) * np.log(1 - yp))
     # 交差エントロピーベクトルの平均値を計算
     return (np.mean(ce1))
 # 予測結果の確率値から 0 or 1 を判断する関数
