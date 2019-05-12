@@ -250,7 +250,7 @@ print(xl, yl, y_rl, y_svm)
 fig = plt.figure(figsize=(6, 6))
 ax = fig.add_subplot(1, 1, 1)
 # 散布図の表示
-plt.scatter(x_t0[:, 1], x_t1[:, 2], marker='x', c='b')
+plt.scatter(x_t0[:, 1], x_t0[:, 2], marker='x', c='b')
 plt.scatter(x_t1[:, 1], x_t1[:, 2], marker='o', c='k')
 # 限界直線の表示
 ax.plot(xl, yl, linewidth=2, c='k', label='Hands On')
