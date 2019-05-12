@@ -7,6 +7,8 @@ from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from mpl_toolkits.mplot3d import Axes3D
+from sklearn.linear_model import LogisticRegression
+from sklearn import svm
 
 # sys.stdoutのエンコード変更
 enc = 'utf-8'
@@ -208,3 +210,55 @@ ax.set_xlim(4, 7.5)
 ax.set_ylim(2, 4.5)
 ax.view_init(elev=20, azim=60)
 plt.savefig('three-dimensional_figure.png')
+
+## scikit-learnライブラリの利用
+# モデル生成
+model_lr = LogisticRegression(solver='liblinear')
+model_svm = svm.SVC(kernel='linear')
+# 機械学習実施
+model_lr.fit(x, yt)
+model_svm.fit(x, yt)
+# 線形回帰
+# 切片の値
+lr_w0 = model_lr.intercept_[0]
+# x1(sepal_length)の係数
+lr_w1 = model_lr.coef_[0, 1]
+# x2(sepal_width)の係数
+lr_w2 = model_lr.coef_[0, 2]
+# SVM
+# 切片の値
+svm_w0 = model_svm.intercept_[0]
+# x1(sepal_length)の係数
+svm_w1 = model_svm.coef_[0, 1]
+# x2(sepal_width)も係数
+svm_w2 = model_svm.coef_[0, 2]
+# 限界直線描画用 x1の値から x2の値を計算する
+def rl(x):
+    wk = lr_w0 + lr_w1 * x
+    wk2 = - wk / lr_w2
+    return(wk2)
+# 限界直線描画用 x1の値から x2の値を計算する
+def svm(x):
+    wk = svm_w0 + svm_w1 * x
+    wk2 = - wk / svm_w2
+    return(wk2)
+y_rl = rl(xl)
+y_svm = svm(xl)
+# 結果確認
+print(xl, yl, y_rl, y_svm)
+# 散布図に限界直線も追記する
+fig = plt.figure(figsize=(6, 6))
+ax = fig.add_subplot(1, 1, 1)
+# 散布図の表示
+plt.scatter(x_t0[:, 1], x_t1[:, 2], marker='x', c='b')
+plt.scatter(x_t1[:, 1], x_t1[:, 2], marker='o', c='k')
+# 限界直線の表示
+ax.plot(xl, yl, linewidth=2, c='k', label='Hands On')
+# lr model
+ax.plot(xl, y_rl, linewidth=2, c='k', linestyle="--", label='scikit LR')
+# svm
+ax.plot(xl, y_svm, linewidth=2, c='k', linestyle="-.", label='scikit SVM')
+ax.legend()
+ax.set_xlabel('$x_1$', fontsize=16)
+ax.set_ylabel('$x_2$', fontsize=16)
+plt.savefig('scikit-learn.png')
