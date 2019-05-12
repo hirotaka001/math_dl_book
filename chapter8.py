@@ -6,6 +6,7 @@ from IPython.display import set_matplotlib_formats
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+from mpl_toolkits.mplot3d import Axes3D
 
 # sys.stdoutのエンコード変更
 enc = 'utf-8'
@@ -192,3 +193,18 @@ plt.xlabel('iter', fontsize=14)
 plt.ylabel('accuracy', fontsize=14)
 plt.title('iter vs accuracy', fontsize=14)
 plt.savefig('iter_vs_accuracy.png')
+# 3次元表示
+x1 = np.linspace(4, 7.5, 100)
+x2 = np.linspace(2, 4.5, 100)
+xx1, xx2 = np.meshgrid(x1, x2)
+xxx = np.asarray([np.ones(xx1.ravel().shape), xx1.ravel(), xx2.ravel()]).T
+c = pred(xxx, w).reshape(xx1.shape)
+plt.figure(figsize=(8, 8))
+ax = plt.subplot(1, 1, 1, projection='3d')
+ax.plot_surface(xx1, xx2, c, color='blue', edgecolor='black', rstride=10, cstride=10, alpha=0.1)
+ax.scatter(x_t1[:, 1], x_t1[:, 2], 1, s=20, alpha=0.9, marker='o', c='b')
+ax.scatter(x_t0[:, 1], x_t0[:, 2], 0, s=20, alpha=0.9, marker='s', c='b')
+ax.set_xlim(4, 7.5)
+ax.set_ylim(2, 4.5)
+ax.view_init(elev=20, azim=60)
+plt.savefig('three-dimensional_figure.png')
