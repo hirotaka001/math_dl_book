@@ -48,7 +48,7 @@ plt.savefig('scatter_chapter9.png')
 x_all = np.insert(x_select, 0, 1.0, axis=1)
 
 # yをOne-hot-Vectorに
-ohe = OneHotEncoder(spare=False)
+ohe = OneHotEncoder(sparse=False)
 y_work = np.c_[y_org]
 y_all_one = ohe.fit_transform(y_work)
 print('オリジナル', y_org.shape)
@@ -170,9 +170,9 @@ c1 = pp[:, 1].reshape(xx1.shape)
 c2 = pp[:, 2].reshape(xx1.shape)
 plt.figure(figsize=(8, 8))
 ax = plt.subplot(1, 1, 1, projection='3d')
-ax.plot_surgace(xx1, xx2, c0, color='lightblue', edgecolor='black', rstride=10, cstride=10, alpha=0.7)
-ax.plot_surgace(xx1, xx2, c1, color='blue', edgecolor='black', rstride=10, cstride=10, alpha=0.7)
-ax.plot_surgace(xx1, xx2, c2, color='lightgrey', edgecolor='black', rstride=10, cstride=10, alpha=0.7)
+ax.plot_surface(xx1, xx2, c0, color='lightblue', edgecolor='black', rstride=10, cstride=10, alpha=0.7)
+ax.plot_surface(xx1, xx2, c1, color='blue', edgecolor='black', rstride=10, cstride=10, alpha=0.7)
+ax.plot_surface(xx1, xx2, c2, color='lightgrey', edgecolor='black', rstride=10, cstride=10, alpha=0.7)
 ax.scatter(x_t0[:, 0], x_t0[:, 1], 1, s=50, alpha=1, marker='+', c='k')
 ax.scatter(x_t1[:, 0], x_t1[:, 1], 1, s=30, alpha=1, marker='o', c='k')
 ax.scatter(x_t2[:, 0], x_t2[:, 1], 1, s=50, alpha=1, marker='x', c='k')
@@ -194,7 +194,7 @@ print(classification_report(y_test, yp_test))
 
 ## 入力変数を4次元に変更
 # ダミー変数を追加
-x_all2 = no.insert(x_org, 0, 1.0, axis=1)
+x_all2 = np.insert(x_org, 0, 1.0, axis=1)
 # 学習データ、検証データに分割
 x_train2, x_test2, y_train, y_test, y_train_one, y_test_one = train_test_split(x_all2, y_org, y_all_one, train_size=75, test_size=75, random_state=123)
 print(x_train2.shape, x_test2.shape, y_train.shape, y_test.shape, y_train_one.shape, y_test_one.shape)
