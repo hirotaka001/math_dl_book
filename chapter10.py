@@ -48,7 +48,7 @@ x_all = np.insert(x_norm, 0, 1, axis=1)
 print('ダミー変数追加後', x_all.shape)
 
 # step2 yをOne-hot-Vectorに
-ohe = OneHotEncoder(spare=False)
+ohe = OneHotEncoder(sparse=False)
 y_all_one = ohe.fit_transform(np.c_[y_org])
 print('One Hot Vectotor化後', y_all_one.shape)
 
