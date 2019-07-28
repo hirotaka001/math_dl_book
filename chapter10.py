@@ -1,5 +1,5 @@
 # 必要ライブラリの宣言
-import sys, io
+import sys, io, os
 import urllib.request
 import numpy as np
 import matplotlib.pyplot as plt
