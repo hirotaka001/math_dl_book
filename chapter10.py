@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import warnings
 warnings.filterwarnings('ignore')
+from IPython.display import set_matplotlib_formats
 from sklearn.datasets import fetch_mldata
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
